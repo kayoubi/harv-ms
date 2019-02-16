@@ -14,18 +14,18 @@ public class Movie {
     private String title;
     private int year;
     private String director;
-    private int stars;
+    private String star;
     private String viewer;
     private String description;
 
     public Movie() {
     }
 
-    public Movie(String title, int year, String director, int stars, String viewer, String description) {
+    public Movie(String title, int year, String director, String star, String viewer, String description) {
         this.title = title;
         this.year = year;
         this.director = director;
-        this.stars = stars;
+        this.star = star;
         this.viewer = viewer;
         this.description = description;
     }
@@ -34,15 +34,27 @@ public class Movie {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public int getYear() {
+        return year;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public String getStar() {
+        return star;
+    }
+
+    public String getViewer() {
+        return viewer;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

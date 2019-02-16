@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
   <body>
-    <p th:text="'We have   ' + ${count} + ' damn movies now!!'" />
+    <p th:text="'We have now  ' + ${count} + ' damn movies now!!'" />
+    <lu th:each="movie: ${movies}">
+      <li th:text="${movie.id} + ' || ' + ${movie.title} + ' || ' + ${movie.year} + ' || ' + ${movie.director} + ' || ' + ${movie.star} + ' || ' + ${movie.viewer}"></li>
+    </lu>
   </body>
 </html>

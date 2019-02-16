@@ -4,7 +4,7 @@ public class MovieBuilder {
     private String title;
     private int year;
     private String director;
-    private int stars;
+    private String star;
     private String viewer;
     private String description;
     
@@ -29,8 +29,8 @@ public class MovieBuilder {
         return this;
     }
 
-    public MovieBuilder withStars(int stars) {
-        this.stars = stars;
+    public MovieBuilder withStar(String star) {
+        this.star = star;
         return this;
     }
 
@@ -45,6 +45,6 @@ public class MovieBuilder {
     }
 
     public Movie createMovie() {
-        return new Movie(title, year, director, stars, viewer, description);
+        return new Movie(title, year, director, star, viewer, description);
     }
 }

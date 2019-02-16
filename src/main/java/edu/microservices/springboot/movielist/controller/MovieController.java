@@ -35,6 +35,7 @@ public class MovieController {
             .createMovie()).getId()
         );
         model.addAttribute("count", movieService.getAll().size());
+        model.addAttribute("movies", movieService.getAll());
         return "movieList";
     }
 }
