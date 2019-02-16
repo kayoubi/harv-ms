@@ -5,6 +5,7 @@ import edu.microservices.springboot.movielist.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Random;
@@ -22,14 +23,18 @@ public class MovieController {
     }
 
     @GetMapping("/")
-    public String home(){
-        logger.info("root request");
+    public String home() {
+        return "index";
+    }
+
+    @GetMapping("/movieList")
+    public String movieList(Model model){
         logger.info("created {}", movieService.create(MovieBuilder
             .builder()
             .withTitle("foobar " + new Random().nextInt())
-            .createMovie())
+            .createMovie()).getId()
         );
-        logger.info("all {}", movieService.getAll().size() );
-        return "index.html";
+        model.addAttribute("count", movieService.getAll().size());
+        return "movieList";
     }
 }
