@@ -1,18 +1,23 @@
 package edu.microservices.springboot.movielist.model;
 
+import javax.persistence.*;
+
 /**
  * @author khaled
  */
+@Entity
+@Table(name = "movie")
 public class Movie {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    private String name;
+    private String title;
 
     public Movie() {
     }
 
-    public Movie(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public Movie(String title) {
+        this.title = title;
     }
 
     public Long getId() {
@@ -23,11 +28,11 @@ public class Movie {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

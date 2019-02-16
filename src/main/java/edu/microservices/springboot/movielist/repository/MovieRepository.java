@@ -1,10 +1,10 @@
 package edu.microservices.springboot.movielist.repository;
 
-import edu.microservices.springboot.movielist.domain.MovieEntity;
+import edu.microservices.springboot.movielist.model.Movie;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * @author khaled
  */
-public interface movieRepository extends CrudRepository<MovieEntity, Long> {
+public interface MovieRepository extends CrudRepository<Movie, Long> {
 }

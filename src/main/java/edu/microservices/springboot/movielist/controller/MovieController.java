@@ -24,7 +24,7 @@ public class MovieController {
     @GetMapping("/")
     public String home(){
         logger.info("root request");
-        logger.info("created {}", movieService.create(new Movie(null, "foobar" + new Random().nextFloat())));
+        logger.info("created {}", movieService.create(new Movie("foobar" + new Random().nextFloat())));
         logger.info("all {}", movieService.getAll().size() );
         return "index.html";
     }
