@@ -1,6 +1,6 @@
 package edu.microservices.springboot.movielist.controller;
 
-import edu.microservices.springboot.movielist.model.Movie;
+import edu.microservices.springboot.movielist.model.MovieBuilder;
 import edu.microservices.springboot.movielist.service.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,11 @@ public class MovieController {
     @GetMapping("/")
     public String home(){
         logger.info("root request");
-        logger.info("created {}", movieService.create(new Movie("foobar" + new Random().nextFloat())));
+        logger.info("created {}", movieService.create(MovieBuilder
+            .builder()
+            .withTitle("foobar " + new Random().nextInt())
+            .createMovie())
+        );
         logger.info("all {}", movieService.getAll().size() );
         return "index.html";
     }

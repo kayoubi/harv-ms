@@ -26,6 +26,6 @@ public class MovieService {
     }
 
     public Movie create(Movie movie) {
-        return movieRepository.save(new Movie(movie.getTitle()));
+        return movieRepository.save(movie);
     }
 }

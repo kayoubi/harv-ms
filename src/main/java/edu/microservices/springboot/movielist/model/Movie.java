@@ -12,12 +12,22 @@ public class Movie {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String title;
+    private int year;
+    private String director;
+    private int stars;
+    private String viewer;
+    private String description;
 
     public Movie() {
     }
 
-    public Movie(String title) {
+    public Movie(String title, int year, String director, int stars, String viewer, String description) {
         this.title = title;
+        this.year = year;
+        this.director = director;
+        this.stars = stars;
+        this.viewer = viewer;
+        this.description = description;
     }
 
     public Long getId() {
