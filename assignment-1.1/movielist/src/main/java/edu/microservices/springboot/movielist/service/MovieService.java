@@ -25,7 +25,11 @@ public class MovieService {
             .collect(Collectors.toList());
     }
 
-    public Movie create(Movie movie) {
+    public List<Movie> findByViewer(final String viewer) {
+        return movieRepository.getAllByViewerOrderByIdDesc(viewer);
+    }
+
+    public Movie create(final Movie movie) {
         return movieRepository.save(movie);
     }
 }

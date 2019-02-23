@@ -1,6 +1,10 @@
 package edu.microservices.springboot.movielist.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author khaled
@@ -11,11 +15,18 @@ public class Movie {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @NotNull
+    @NotBlank
     private String title;
+    @NotNull
     private int year;
+    @NotBlank
     private String director;
+    @NotBlank
     private String star;
+    @NotBlank
     private String viewer;
+    @NotBlank
     private String description;
 
     public Movie() {

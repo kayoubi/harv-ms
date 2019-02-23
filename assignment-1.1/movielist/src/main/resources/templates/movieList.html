@@ -1,16 +1,72 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-  <body>
-    <form action="#" th:action="@{/createMovie}" th:object="${movie}" method="post">
-      <p>Title: <input type="text" th:field="*{title}" /></p>
-      <p>
-        <input type="submit" value="Submit" />
-        <input type="reset" value="Reset" />
-      </p>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+</head>
+<body>
+<div class="ui container">
+  <br/><br/>
+  <h1 class="ui header">Your Movies List</h1>
+
+  <div class="ui items">
+  <div class="ui grid equal width item" th:each="movie, iter: ${movies}">
+    <div class="row">
+      <div th:text="${movie.id}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+      <div th:text="${movie.title}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+      <div th:text="${movie.year}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+      <div th:text="${movie.director}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+      <div th:text="${movie.star}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+      <div th:text="${movie.viewer}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+    </div>
+    <div class="row">
+      <div th:text="${movie.description}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+    </div>
+  </div>
+
+
+    <br/><div class="ui divider"/><br/><br/>
+
+  <div class="ui container item">
+    <h2 class="ui header">Add a new movie</h2>
+
+    <form class="ui form" action="#" th:action="@{/createMovie}" th:object="${movie}" method="post">
+      <div class="field">
+        <label>Title: </label>
+        <input type="text" th:field="*{title}"/>
+        <div class="ui red message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+      </div>
+      <div class="field">
+        <label>Year: </label>
+        <select class="ui dropdown" th:field="*{year}">
+          <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
+        </select>
+        <div class="ui red message" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
+      </div>
+      <div class="field">
+        <label>Director: </label>
+        <input type="text" th:field="*{director}"/>
+        <div class="ui red message" th:if="${#fields.hasErrors('director')}" th:errors="*{director}"></div>
+      </div>
+      <div class="field">
+        <label>Star: </label>
+        <input type="text" th:field="*{star}"/>
+        <div class="ui red message" th:if="${#fields.hasErrors('star')}" th:errors="*{star}"></div>
+      </div>
+      <div class="field">
+        <label>Viewer: </label>
+        <input type="text" th:field="*{viewer}"/>
+        <div class="ui red message" th:if="${#fields.hasErrors('viewer')}" th:errors="*{viewer}"></div>
+      </div>
+      <div class="field">
+        <label>Description: </label>
+        <textarea th:field="*{description}"/>
+        <div class="ui red message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+      </div>
+      <button class="ui button" type="submit">Submit</button>
     </form>
-    <p th:text="'We have now  ' + ${count} + ' damn movies now!!'" />
-    <lu th:each="movie: ${movies}">
-      <li th:text="${movie.id} + ' || ' + ${movie.title} + ' || ' + ${movie.year} + ' || ' + ${movie.director} + ' || ' + ${movie.star} + ' || ' + ${movie.viewer}"></li>
-    </lu>
-  </body>
+  </div>
+  </div>
+</div>
+
+</body>
 </html>
