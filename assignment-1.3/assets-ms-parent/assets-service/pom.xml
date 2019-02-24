@@ -10,7 +10,7 @@
 
 	<artifactId>assets-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>assets-service</name>
+	<name>assets-service-with-config</name>
 	<description>Demo project for Spring Boot</description>
 
 	<dependencies>

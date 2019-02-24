@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
 
 
-  <name>assets-parent-pom</name>
+  <name>assets-parent-pom-with-config</name>
   <description>Parent Pom for the assets project</description>
 
   <parent>
