@@ -1,0 +1,6 @@
+version: '2'
+services:
+  assetsservice:
+    image: kayoubi/assets-service:0.1
+    ports:
+      - "8080:8080"
