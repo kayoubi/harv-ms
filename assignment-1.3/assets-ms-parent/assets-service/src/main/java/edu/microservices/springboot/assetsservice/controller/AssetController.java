@@ -4,6 +4,8 @@ import edu.microservices.springboot.assetsservice.model.Asset;
 import edu.microservices.springboot.assetsservice.service.AssetService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author khaled
  */
@@ -19,6 +21,22 @@ public class AssetController {
 
     @GetMapping("/assets/{assetId}")
     public Asset getAsset(@PathVariable String organizationId, @PathVariable String assetId) {
-        return assetService.getAsset(organizationId, assetId);
+        return assetService.getAsset(organizationId, assetId).orElse(null);
+    }
+
+    @DeleteMapping("/assets/{assetId}")
+    public void deleteAsset(@PathVariable String organizationId, @PathVariable String assetId) {
+        assetService.deleteAsset(organizationId, assetId);
+    }
+
+    @PostMapping("/assets")
+    public Asset createAssets(@PathVariable String organizationId, @RequestBody Asset asset) {
+        asset.setOrganizationId(organizationId);
+        return assetService.create(asset);
+    }
+
+    @GetMapping("/assets")
+    public List<Asset> allAssets(@PathVariable String organizationId) {
+        return assetService.allAssets(organizationId);
     }
 }

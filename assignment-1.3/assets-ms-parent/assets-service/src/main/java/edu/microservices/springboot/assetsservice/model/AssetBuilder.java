@@ -1,7 +1,7 @@
 package edu.microservices.springboot.assetsservice.model;
 
 public class AssetBuilder {
-    private String id;
+    private Long id;
     private String organizationId;
     private String assetName;
     private String assetType;
@@ -12,7 +12,7 @@ public class AssetBuilder {
         return new AssetBuilder();
     }
 
-    public AssetBuilder withId(String id) {
+    public AssetBuilder withId(Long id) {
         this.id = id;
         return this;
     }
