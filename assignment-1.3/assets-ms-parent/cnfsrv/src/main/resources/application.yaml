@@ -5,10 +5,13 @@ spring:
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/conf/assetservice
-  profiles:
-    active: native
+#        native:
+#          search-locations: classpath:/conf/assetservice
+        git:
+          uri: https://github.com/kayoubi/harv-conf-server
+          searchPaths: assetservice
+#  profiles:
+#    active: native
 
 #spring:
 #  cloud:
