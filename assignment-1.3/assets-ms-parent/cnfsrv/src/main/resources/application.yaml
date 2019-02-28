@@ -10,6 +10,8 @@ spring:
         git:
           uri: https://github.com/kayoubi/harv-conf-server
           searchPaths: assetservice
+        encrypt:
+          enabled: true
 #  profiles:
 #    active: native
 
