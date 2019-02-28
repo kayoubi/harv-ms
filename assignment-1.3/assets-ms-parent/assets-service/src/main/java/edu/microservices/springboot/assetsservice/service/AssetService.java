@@ -53,4 +53,16 @@ public class AssetService {
             }
         });
     }
+
+    public Asset updateAsset(String organizationId, String assetId, Asset asset) {
+        Optional<Asset> existing = getAsset(organizationId, assetId);
+        if (existing.isPresent()) {
+            Asset a = existing.get();
+            a.setOrganizationId(asset.getOrganizationId());
+            a.setAssetName(asset.getAssetName());
+            a.setAssetType(asset.getAssetType());
+            return repository.save(a);
+        }
+        return repository.save(asset);
+    }
 }

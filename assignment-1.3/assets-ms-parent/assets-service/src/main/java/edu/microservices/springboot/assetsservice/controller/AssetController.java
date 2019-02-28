@@ -24,6 +24,11 @@ public class AssetController {
         return assetService.getAsset(organizationId, assetId).orElse(null);
     }
 
+    @PutMapping("/assets/{assetId}")
+    public Asset updateAsset(@PathVariable String organizationId, @PathVariable String assetId, @RequestBody Asset asset) {
+        return assetService.updateAsset(organizationId, assetId, asset);
+    }
+
     @DeleteMapping("/assets/{assetId}")
     public void deleteAsset(@PathVariable String organizationId, @PathVariable String assetId) {
         assetService.deleteAsset(organizationId, assetId);
