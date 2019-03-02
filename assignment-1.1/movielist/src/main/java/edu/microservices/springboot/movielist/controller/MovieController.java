@@ -54,8 +54,7 @@ public class MovieController {
     public String create(Model model, @Valid Movie movie, BindingResult bindingResult) {
         model.addAttribute("years", years);
         if (bindingResult.hasErrors()) {
-
-            return "/movieList";
+            return "movieList";
         }
         movieService.create(movie);
 

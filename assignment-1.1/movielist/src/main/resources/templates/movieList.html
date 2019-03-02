@@ -6,25 +6,31 @@
 <body>
 <div class="ui container">
   <br/><br/>
-  <h1 class="ui header">Your Movies List</h1>
-
-  <div class="ui items">
-  <div class="ui grid equal width item" th:each="movie, iter: ${movies}">
-    <div class="row">
-      <div th:text="${movie.id}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
-      <div th:text="${movie.title}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
-      <div th:text="${movie.year}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
-      <div th:text="${movie.director}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
-      <div th:text="${movie.star}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
-      <div th:text="${movie.viewer}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
-    </div>
-    <div class="row">
-      <div th:text="${movie.description}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+  <div th:if="${not #lists.isEmpty(movies)}">
+    <h1 class="ui header">Your Movies List</h1>
+    <div class="ui items">
+      <div class="ui grid equal width item" th:each="movie, iter: ${movies}">
+        <div class="row">
+          <div th:text="${movie.id}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+          <div th:text="${movie.title}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+          <div th:text="${movie.year}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+          <div th:text="${movie.director}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+          <div th:text="${movie.star}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+          <div th:text="${movie.viewer}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+        </div>
+        <div class="row">
+          <div th:text="${movie.description}" class="column" th:classappend="${iter.odd} ? 'grey' : 'blue'"></div>
+        </div>
+      </div>
     </div>
   </div>
 
+  <div th:if="${#lists.isEmpty(movies)}">
+    <h1 class="ui header">No previous reviews! Go ahead..</h1>
+  </div>
 
-    <br/><div class="ui divider"/><br/><br/>
+
+  <br/><div class="ui divider"/><br/><br/>
 
   <div class="ui container item">
     <h2 class="ui header">Add a new movie</h2>
