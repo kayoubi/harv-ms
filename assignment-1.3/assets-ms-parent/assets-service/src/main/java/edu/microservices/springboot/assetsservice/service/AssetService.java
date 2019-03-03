@@ -58,11 +58,15 @@ public class AssetService {
         Optional<Asset> existing = getAsset(organizationId, assetId);
         if (existing.isPresent()) {
             Asset a = existing.get();
-            a.setOrganizationId(asset.getOrganizationId());
+            a.setOrganizationId(
+                asset.getOrganizationId() != null ? asset.getOrganizationId() : organizationId
+            );
             a.setAssetName(asset.getAssetName());
             a.setAssetType(asset.getAssetType());
             return repository.save(a);
         }
+        // create a new Asset using the org ID in the request path
+        asset.setOrganizationId(organizationId);
         return repository.save(asset);
     }
 }

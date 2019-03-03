@@ -10,7 +10,7 @@ services:
       timeout: 10s
       retries: 2
     environment:
-      ENCRYPT_KEY:       "IMSYMMETRIC"
+      ENCRYPT_KEY: "IMSYMMETRIC"
   assetsservice:
     image: kayoubi/assets-service:chapter-3
     ports:
