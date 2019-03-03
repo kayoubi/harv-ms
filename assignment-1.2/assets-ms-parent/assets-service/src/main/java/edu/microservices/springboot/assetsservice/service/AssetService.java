@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AssetService {
+    /**
+     * a dummy implementation to return an Asset Object
+     */
     public Asset getAsset(String organizationId, String assetId) {
         return AssetBuilder.instance()
             .withId(assetId)
