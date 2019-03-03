@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
+ * a Proxy Service class between the Controller and the DAO layer
+ *
  * @author khaled
  */
 @Service

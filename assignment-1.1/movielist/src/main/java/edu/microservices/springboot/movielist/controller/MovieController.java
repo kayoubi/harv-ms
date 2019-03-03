@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * Controller class to accept HTTP request and response with a path to thymeleaf template
+ *
  * @author khaled
  */
 @Controller
@@ -27,11 +29,21 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    /**
+     * Handles access to the main page
+     *
+     */
     @GetMapping("/")
     public String home() {
         return "index";
     }
 
+    /**
+     * Handles access to the movie-list page
+     * @param viewer request param, if passed will return all movies reviewed by that user
+     *               otherwise empty list
+     * @return movie-list thymeleaf page
+     */
     @GetMapping("/movieList")
     public String movieList(@RequestParam(required = false) String viewer, Model model){
         if (viewer != null) {
@@ -45,11 +57,22 @@ public class MovieController {
         return "movieList";
     }
 
+    /**
+     * Handles accidental refresh by the user after submitting the form
+     * @return the movie-list thymeleaf page
+     */
     @GetMapping("/createMovie")
     public String createRedirect() {
         return "redirect:/movieList";
     }
 
+    /**
+     * Handles submitting the form if there is an validation error, keep the user on the same
+     * page, otherwise create a movie and redirect to movie-list page for that user
+     * @param movie the new Movie being submitted
+     * @param bindingResult to check validation error
+     * @return the next page the user will see
+     */
     @PostMapping("/createMovie")
     public String create(Model model, @Valid Movie movie, BindingResult bindingResult) {
         model.addAttribute("years", years);

@@ -9,5 +9,10 @@ import java.util.List;
  * @author khaled
  */
 public interface MovieRepository extends CrudRepository<Movie, Long> {
+    /**
+     * a JPA method to return all movies by a particular viewer
+     * @param viewer the viewer to return its movies
+     * @return List of movies by the specified viewer
+     */
     List<Movie> getAllByViewerOrderByIdDesc(String viewer);
 }
