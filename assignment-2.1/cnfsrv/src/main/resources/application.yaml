@@ -9,7 +9,7 @@ spring:
 #          search-locations: classpath:/conf/assetservice
         git:
           uri: https://github.com/kayoubi/harv-conf-server
-          searchPaths: assetservice
+          searchPaths: assetservice, organizationservice
         encrypt:
           enabled: true
 #  profiles:
