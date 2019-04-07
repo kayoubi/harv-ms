@@ -1,0 +1,33 @@
+version: '2.1'
+services:
+  configserver:
+    extends:
+      file: ../common/docker-compose.yml
+      service: configserver
+  eurekaserver:
+    extends:
+      file: ../common/docker-compose.yml
+      service: eurekaserver
+  assetsservice:
+    image: kayoubi/assets-service:2.1
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      database-prod:
+        condition: service_started
+  organizationservice:
+    extends:
+      file: ../common/docker-compose.yml
+      service: organizationservice
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod"
+  database-prod:
+    extends:
+      file: ../common/docker-compose.yml
+      service: database
+    environment:
+      POSTGRES_DB:       "eagle_eye_prod"

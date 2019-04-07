@@ -1,0 +1,47 @@
+version: '2.1'
+services:
+  configserver:
+    image: kayoubi/conf-server:2.1
+    ports:
+      - "8888:8888"
+    healthcheck:
+      test: ["CMD", "curl", "http://configserver:8888/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 2
+    environment:
+      ENCRYPT_KEY: "IMSYMMETRIC"
+  assetsservice:
+    image: kayoubi/assets-service:2.1
+    ports:
+      - "8080:8080"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      database:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
+  organizationservice:
+    image: kayoubi/organization-service:2.1
+    ports:
+      - "8181:8181"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      database:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
+  eurekaserver:
+    image: kayoubi/eureka-server:2.1
+    ports:
+      - "8761:8761"
+  database:
+    image: postgres:9.5
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "p0stgr@s"
+      POSTGRES_DB:       "eagle_eye_local"
