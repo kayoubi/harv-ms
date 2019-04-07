@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 /**
  * @author khaled
@@ -35,7 +36,9 @@ public class AssetService {
         this.organizationFeignClient = organizationFeignClient;
     }
 
+    @HystrixCommand
     public List<Asset> allAssets(String organizationId) {
+        randomlyRunLong();
         return repository.findAllByOrganizationId(organizationId);
     }
 
@@ -127,5 +130,21 @@ public class AssetService {
         // create a new Asset using the org ID in the request path
         asset.setOrganizationId(organizationId);
         return repository.save(asset);
+    }
+
+    private void randomlyRunLong(){
+        Random rand = new Random();
+
+        int randomNum = rand.nextInt((3 - 1) + 1) + 1;
+
+        if (randomNum==3) sleep();
+    }
+
+    private void sleep(){
+        try {
+            Thread.sleep(11000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
