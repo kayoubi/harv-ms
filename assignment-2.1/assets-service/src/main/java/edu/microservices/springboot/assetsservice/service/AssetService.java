@@ -1,8 +1,11 @@
 package edu.microservices.springboot.assetsservice.service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import edu.microservices.springboot.assetsservice.context.UserContextHolder;
 import edu.microservices.springboot.assetsservice.domain.AssetResult;
 import edu.microservices.springboot.assetsservice.domain.Organization;
+import edu.microservices.springboot.assetsservice.model.AssetBuilder;
 import edu.microservices.springboot.assetsservice.repository.AssetRepository;
 import edu.microservices.springboot.assetsservice.model.Asset;
 import org.slf4j.Logger;
@@ -10,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -36,10 +40,25 @@ public class AssetService {
         this.organizationFeignClient = organizationFeignClient;
     }
 
-    @HystrixCommand
+    @HystrixCommand(
+        fallbackMethod = "fallbackAllAssets",
+        threadPoolKey = "assetsByOrgThreadPool",
+        threadPoolProperties = {
+            @HystrixProperty(name = "coreSize", value = "30"),
+            @HystrixProperty(name = "maxQueueSize", value = "10")
+        },
+        commandProperties={
+            @HystrixProperty(name="metrics.rollingStats.timeInMilliseconds", value="12000")
+        }
+    )
     public List<Asset> allAssets(String organizationId) {
+        logger.debug("Got Correlation Id {}", UserContextHolder.getCorrelationId());
         randomlyRunLong();
         return repository.findAllByOrganizationId(organizationId);
+    }
+
+    public List<Asset> fallbackAllAssets(String organizationId) {
+        return Collections.singletonList(AssetBuilder.instance().withId(-1L).withAssetName("Sorry No Assert Info Available").build());
     }
 
     public Asset create(Asset asset) {

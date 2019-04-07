@@ -1,8 +1,11 @@
 package edu.microservices.springboot.assetsservice.controller;
 
+import edu.microservices.springboot.assetsservice.context.UserContextHolder;
 import edu.microservices.springboot.assetsservice.domain.AssetResult;
 import edu.microservices.springboot.assetsservice.model.Asset;
 import edu.microservices.springboot.assetsservice.service.AssetService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +16,9 @@ import java.util.List;
 @RequestMapping("v1/organizations/{organizationId}")
 @RestController
 public class AssetController {
-    private final AssetService assetService;
+    private static final Logger logger = LoggerFactory.getLogger(AssetController.class);
 
+    private final AssetService assetService;
 
     public AssetController(AssetService assetService) {
         this.assetService = assetService;
@@ -72,6 +76,7 @@ public class AssetController {
      */
     @GetMapping("/assets")
     public List<Asset> allAssets(@PathVariable String organizationId) {
+        logger.debug("Got Correlation Id {}", UserContextHolder.getCorrelationId());
         return assetService.allAssets(organizationId);
     }
 }
