@@ -1,4 +1,4 @@
-package edu.microservices.springboot.assetsservice.model;
+package edu.microservices.springboot.organization.model;
 
 import javax.persistence.*;
 

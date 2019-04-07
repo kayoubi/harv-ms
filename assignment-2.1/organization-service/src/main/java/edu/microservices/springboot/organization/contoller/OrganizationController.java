@@ -1,7 +1,7 @@
-package edu.microservices.springboot.assetsservice.contoller;
+package edu.microservices.springboot.organization.contoller;
 
-import edu.microservices.springboot.assetsservice.model.Organization;
-import edu.microservices.springboot.assetsservice.repository.OrganizationRepository;
+import edu.microservices.springboot.organization.model.Organization;
+import edu.microservices.springboot.organization.repository.OrganizationRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,6 +1,6 @@
-package edu.microservices.springboot.assetsservice.repository;
+package edu.microservices.springboot.organization.repository;
 
-import edu.microservices.springboot.assetsservice.model.Organization;
+import edu.microservices.springboot.organization.model.Organization;
 import org.springframework.data.repository.CrudRepository;
 
 /**

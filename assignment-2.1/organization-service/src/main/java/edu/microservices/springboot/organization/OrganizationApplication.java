@@ -1,4 +1,4 @@
-package edu.microservices.springboot.assetsservice;
+package edu.microservices.springboot.organization;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.thoughtmechanix.organization;
+package edu.microservices.springboot.organization;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
