@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public class OrganizationService {
     private final DiscoveryClient discoveryClient;
-    static final String ORGANIZATION_SERVICE = "organizationservice";
+    static final String ORGANIZATION_SERVICE = "organization";
 
     public OrganizationService(DiscoveryClient discoveryClient) {
         this.discoveryClient = discoveryClient;

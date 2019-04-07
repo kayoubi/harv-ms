@@ -1,7 +1,5 @@
 package edu.microservices.springboot.assetsservice.domain;
 
-import javax.persistence.Column;
-
 /**
  * @author khaled
  */
@@ -10,6 +8,9 @@ public class AssetResult {
     private String assetName;
     private String assetType;
     private Organization organization;
+
+    public AssetResult() {
+    }
 
     public AssetResult(Long id, String assetName, String assetType, Organization organization) {
         this.id = id;

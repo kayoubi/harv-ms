@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * @author khaled
  */
-@FeignClient("organizationservice")
+@FeignClient("organization")
 public interface OrganizationFeignClient {
     @GetMapping(value="/organizations/{organizationId}", consumes="application/json")
     Organization getOrganization(@PathVariable("organizationId") String organizationId);

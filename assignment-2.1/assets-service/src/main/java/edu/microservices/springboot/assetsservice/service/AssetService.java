@@ -1,5 +1,6 @@
 package edu.microservices.springboot.assetsservice.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import edu.microservices.springboot.assetsservice.domain.AssetResult;
 import edu.microservices.springboot.assetsservice.domain.Organization;
 import edu.microservices.springboot.assetsservice.repository.AssetRepository;
@@ -70,6 +71,7 @@ public class AssetService {
 
     private final Organization DUMMY = new Organization(null, "Dummy Org", null, null, null);
 
+    @HystrixCommand
     Organization getOrganization(String organizationId, String type) {
         Optional<Organization> organization;
         if ("discover".equals(type)) {
