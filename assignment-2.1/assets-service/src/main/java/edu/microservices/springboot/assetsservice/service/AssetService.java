@@ -5,6 +5,8 @@ import edu.microservices.springboot.assetsservice.domain.AssetResult;
 import edu.microservices.springboot.assetsservice.domain.Organization;
 import edu.microservices.springboot.assetsservice.repository.AssetRepository;
 import edu.microservices.springboot.assetsservice.model.Asset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +21,16 @@ public class AssetService {
     @Value("${spring.jpa.database}")
     private String db;
 
+    private static final Logger logger = LoggerFactory.getLogger(AssetService.class);
+
     private final AssetRepository repository;
-    private final OrganizationService organizationService;
+    private final OrganizationDiscoveryService organizationDiscoveryService;
     private final OrganizationRestTemplateClient organizationRestTemplateClient;
     private final OrganizationFeignClient organizationFeignClient;
 
-    public AssetService(AssetRepository repository, OrganizationService organizationService, OrganizationRestTemplateClient organizationRestTemplateClient, OrganizationFeignClient organizationFeignClient) {
+    public AssetService(AssetRepository repository, OrganizationDiscoveryService organizationDiscoveryService, OrganizationRestTemplateClient organizationRestTemplateClient, OrganizationFeignClient organizationFeignClient) {
         this.repository = repository;
-        this.organizationService = organizationService;
+        this.organizationDiscoveryService = organizationDiscoveryService;
         this.organizationRestTemplateClient = organizationRestTemplateClient;
         this.organizationFeignClient = organizationFeignClient;
     }
@@ -74,12 +78,15 @@ public class AssetService {
     @HystrixCommand
     Organization getOrganization(String organizationId, String type) {
         Optional<Organization> organization;
-        if ("discover".equals(type)) {
-            organization = organizationRestTemplateClient.getOrganization(organizationId);
+        if ("discovery".equals(type)) {
+            logger.debug("Using the Discovery Service");
+            organization = organizationDiscoveryService.getOrganization(organizationId);
         } else if ("feign".equals(type)) {
+            logger.debug("Using the Feign Client");
             organization = Optional.of(organizationFeignClient.getOrganization(organizationId));
         } else {
-            organization = organizationService.getOrganization(organizationId);
+            logger.debug("Using the Rest Template");
+            organization = organizationRestTemplateClient.getOrganization(organizationId);
         }
         return organization.orElse(DUMMY);
     }

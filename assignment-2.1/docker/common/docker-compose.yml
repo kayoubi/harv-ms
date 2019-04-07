@@ -22,10 +22,21 @@ services:
         condition: service_started
       eurekaserver:
         condition: service_started
-  organizationservice:
+  organizationservice1:
     image: kayoubi/organization-service:2.1
     ports:
       - "8181:8181"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      database:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
+  organizationservice2:
+    image: kayoubi/organization-service:2.1
+    ports:
+      - "8182:8181"
     depends_on:
       configserver:
         condition: service_healthy

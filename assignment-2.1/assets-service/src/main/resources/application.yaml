@@ -5,3 +5,8 @@ management:
     web:
       exposure:
         include: "*"
+
+#this was needed to enable the data.sql
+spring:
+  datasource:
+    initialization-mode: always

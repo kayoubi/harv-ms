@@ -1,6 +1,8 @@
 package edu.microservices.springboot.assetsservice.service;
 
 import edu.microservices.springboot.assetsservice.domain.Organization;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpMethod;
@@ -15,11 +17,13 @@ import java.util.Optional;
  * @author khaled
  */
 @Service
-public class OrganizationService {
+public class OrganizationDiscoveryService {
+    private static final Logger logger = LoggerFactory.getLogger(OrganizationDiscoveryService.class);
+
     private final DiscoveryClient discoveryClient;
     static final String ORGANIZATION_SERVICE = "organization";
 
-    public OrganizationService(DiscoveryClient discoveryClient) {
+    public OrganizationDiscoveryService(DiscoveryClient discoveryClient) {
         this.discoveryClient = discoveryClient;
     }
 
@@ -31,6 +35,8 @@ public class OrganizationService {
         String serviceUri = String.format("%s/organizations/%s",
             instances.get(0).getUri().toString(),
             organizationId);
+
+        logger.debug("Using the Organization Service URL {}", serviceUri);
 
         ResponseEntity<Organization> restExchange = new RestTemplate()
             .exchange(serviceUri, HttpMethod.GET, null, Organization.class, organizationId);

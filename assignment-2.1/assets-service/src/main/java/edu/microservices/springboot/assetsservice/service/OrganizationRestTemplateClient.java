@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
-import static edu.microservices.springboot.assetsservice.service.OrganizationService.ORGANIZATION_SERVICE;
+import static edu.microservices.springboot.assetsservice.service.OrganizationDiscoveryService.ORGANIZATION_SERVICE;
 
 
 /**
