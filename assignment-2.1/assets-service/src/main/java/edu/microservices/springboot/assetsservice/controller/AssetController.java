@@ -1,5 +1,6 @@
 package edu.microservices.springboot.assetsservice.controller;
 
+import edu.microservices.springboot.assetsservice.domain.AssetResult;
 import edu.microservices.springboot.assetsservice.model.Asset;
 import edu.microservices.springboot.assetsservice.service.AssetService;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,9 @@ public class AssetController {
      * @param assetId the Asset Id
      * @return the Asset if found one otherwise null
      */
-    @GetMapping("/assets/{assetId}")
-    public Asset getAsset(@PathVariable String organizationId, @PathVariable String assetId) {
-        return assetService.getAsset(organizationId, assetId).orElse(null);
+    @GetMapping("/assets/{assetId}/{type}")
+    public AssetResult getAsset(@PathVariable String organizationId, @PathVariable String assetId, @PathVariable String type) {
+        return assetService.getAsset(organizationId, assetId, type).orElse(null);
     }
 
     /**

@@ -1,5 +1,7 @@
 package edu.microservices.springboot.assetsservice.service;
 
+import edu.microservices.springboot.assetsservice.domain.AssetResult;
+import edu.microservices.springboot.assetsservice.domain.Organization;
 import edu.microservices.springboot.assetsservice.repository.AssetRepository;
 import edu.microservices.springboot.assetsservice.model.Asset;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,9 +19,15 @@ public class AssetService {
     private String db;
 
     private final AssetRepository repository;
+    private final OrganizationService organizationService;
+    private final OrganizationRestTemplateClient organizationRestTemplateClient;
+    private final OrganizationFeignClient organizationFeignClient;
 
-    public AssetService(AssetRepository repository) {
+    public AssetService(AssetRepository repository, OrganizationService organizationService, OrganizationRestTemplateClient organizationRestTemplateClient, OrganizationFeignClient organizationFeignClient) {
         this.repository = repository;
+        this.organizationService = organizationService;
+        this.organizationRestTemplateClient = organizationRestTemplateClient;
+        this.organizationFeignClient = organizationFeignClient;
     }
 
     public List<Asset> allAssets(String organizationId) {
@@ -28,6 +36,15 @@ public class AssetService {
 
     public Asset create(Asset asset) {
         return repository.save(asset);
+    }
+
+    public Optional<AssetResult> getAsset(String organizationId, String assetId, String type) {
+        Optional<Asset> asset = getAsset(organizationId, assetId);
+        if (asset.isPresent()) {
+            Asset a = asset.get();
+            return Optional.of(new AssetResult(a.getId(), a.getAssetName(), a.getAssetType(), getOrganization(a.getOrganizationId(), type)));
+        }
+        return Optional.empty();
     }
 
     /**
@@ -49,6 +66,20 @@ public class AssetService {
             return Optional.empty();
         }
         return Optional.empty();
+    }
+
+    private final Organization DUMMY = new Organization(null, "Dummy Org", null, null, null);
+
+    Organization getOrganization(String organizationId, String type) {
+        Optional<Organization> organization;
+        if ("discover".equals(type)) {
+            organization = organizationRestTemplateClient.getOrganization(organizationId);
+        } else if ("feign".equals(type)) {
+            organization = Optional.of(organizationFeignClient.getOrganization(organizationId));
+        } else {
+            organization = organizationService.getOrganization(organizationId);
+        }
+        return organization.orElse(DUMMY);
     }
 
     /**

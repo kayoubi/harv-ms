@@ -1,4 +1,4 @@
-package edu.microservices.springboot.assetsservice.model;
+package edu.microservices.springboot.assetsservice.domain;
 
 /**
  * @author khaled
@@ -10,6 +10,13 @@ public class Organization {
     private String contactEmail;
     private String contactPhone;
 
+    public Organization(String id, String name, String contactName, String contactEmail, String contactPhone) {
+        this.id = id;
+        this.name = name;
+        this.contactName = contactName;
+        this.contactEmail = contactEmail;
+        this.contactPhone = contactPhone;
+    }
 
     public String getId() {
         return id;

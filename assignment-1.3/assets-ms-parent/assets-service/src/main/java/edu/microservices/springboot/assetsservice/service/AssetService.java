@@ -30,6 +30,12 @@ public class AssetService {
         return repository.save(asset);
     }
 
+    /**
+     * find an asset with an Id in a specific Org
+     * @param organizationId the org id to look in
+     * @param assetId the Asset Id
+     * @return an Optional Asset if found one
+     */
     public Optional<Asset> getAsset(String organizationId, String assetId) {
         try {
             Long id = Long.parseLong(assetId);
@@ -45,6 +51,11 @@ public class AssetService {
         return Optional.empty();
     }
 
+    /**
+     * Delete an asset with an Id in a specific Org, do nothing if non found
+     * @param organizationId the org id to look in
+     * @param assetId the Asset Id to delete
+     */
     public void deleteAsset(String organizationId, String assetId) {
         Optional<Asset> asset = getAsset(organizationId, assetId);
         asset.ifPresent(a -> {
@@ -54,6 +65,14 @@ public class AssetService {
         });
     }
 
+    /**
+     * find an asset with an Id in a specific Org and update it based on the Asset passed
+     * if no Asset found create a new one in the specified org based on the Asset param
+     * @param organizationId the org id to look in
+     * @param assetId the Asset Id to update
+     * @param asset the Asset object to be used to update / create
+     * @return an updated version if one found, otherwise the newly created Asset
+     */
     public Asset updateAsset(String organizationId, String assetId, Asset asset) {
         Optional<Asset> existing = getAsset(organizationId, assetId);
         if (existing.isPresent()) {
