@@ -19,10 +19,41 @@ services:
         condition: service_healthy
       database-prod:
         condition: service_started
-  organizationservice:
-    extends:
-      file: ../common/docker-compose.yml
-      service: organizationservice
+  gatewayserver:
+    image: kayoubi/gateway-server:2.1
+    ports:
+      - "8787:8787"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
+  organizationservice1:
+    image: kayoubi/organization-service:2.1
+    ports:
+      - "8181:8181"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      database-prod:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod"
+  organizationservice2:
+    image: kayoubi/organization-service:2.1
+    ports:
+      - "8182:8181"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      database-prod:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
     environment:
       - "SPRING_PROFILES_ACTIVE=prod"
   database-prod:
