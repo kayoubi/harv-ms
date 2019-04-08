@@ -21,6 +21,7 @@
     <module>organization-service</module>
     <module>cnfsrv</module>
     <module>eurekasrv</module>
+    <module>gatewaysrv</module>
     <module>common-util</module>
   </modules>
 
