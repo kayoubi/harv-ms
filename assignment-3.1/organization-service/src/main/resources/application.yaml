@@ -1,0 +1,8 @@
+server:
+  port: 8181
+
+#this was needed to enable the data.sql
+spring:
+  datasource:
+    initialization-mode: always
+
