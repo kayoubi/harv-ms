@@ -21,8 +21,8 @@ public class OrganizationDiscoveryService {
     private static final Logger logger = LoggerFactory.getLogger(OrganizationDiscoveryService.class);
 
     private final DiscoveryClient discoveryClient;
-//    static final String ORGANIZATION_SERVICE = "organization";
-    static final String ORGANIZATION_SERVICE = "localhost:8181";
+    static final String ORGANIZATION_SERVICE = "organization";
+//    static final String ORGANIZATION_SERVICE = "localhost:8181";
 
     public OrganizationDiscoveryService(DiscoveryClient discoveryClient) {
         this.discoveryClient = discoveryClient;

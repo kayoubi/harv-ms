@@ -1,9 +1,11 @@
 package edu.microservices.springboot.assetsservice.domain;
 
+import java.io.Serializable;
+
 /**
  * @author khaled
  */
-public class Organization {
+public class Organization implements Serializable {
     private String id;
     private String name;
     private String contactName;
