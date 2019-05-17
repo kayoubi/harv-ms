@@ -34,4 +34,19 @@ public class FilterUtils {
         Object serviceId = ctx.get("serviceId");
         return serviceId == null ? "" : serviceId.toString();
     }
+
+    static String getAuthToken(){
+        RequestContext ctx = RequestContext.getCurrentContext();
+        return ctx.getRequest().getHeader(AUTH_TOKEN);
+    }
+
+    static void setUserId(String userId){
+        RequestContext ctx = RequestContext.getCurrentContext();
+        ctx.addZuulRequestHeader(USER_ID,  userId);
+    }
+
+    static void setOrgId(String orgId){
+        RequestContext ctx = RequestContext.getCurrentContext();
+        ctx.addZuulRequestHeader(ORG_ID,  orgId);
+    }
 }
