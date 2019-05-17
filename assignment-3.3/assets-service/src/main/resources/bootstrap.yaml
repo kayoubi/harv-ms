@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: assetservice
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8888/
+
+
+---
+
+spring:
+  profiles: dev, prod
+  cloud:
+    config:
+      uri: http://configserver:8888/

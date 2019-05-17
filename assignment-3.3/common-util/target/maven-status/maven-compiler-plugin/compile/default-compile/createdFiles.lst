@@ -1,0 +1,7 @@
+edu/microservices/springboot/assetsservice/context/UserContextHolder.class
+edu/microservices/springboot/assetsservice/hystrix/ThreadLocalConfiguration.class
+edu/microservices/springboot/assetsservice/context/UserContextInterceptor.class
+edu/microservices/springboot/assetsservice/context/UserContextFilter.class
+edu/microservices/springboot/assetsservice/hystrix/ThreadLocalAwareStrategy.class
+edu/microservices/springboot/assetsservice/hystrix/DelegatingUserContextCallable.class
+edu/microservices/springboot/assetsservice/context/UserContext.class

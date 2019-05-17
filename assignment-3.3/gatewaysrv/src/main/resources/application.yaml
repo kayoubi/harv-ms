@@ -1,0 +1,29 @@
+server:
+  port: 8787
+
+
+#eureka:
+#  instance:
+#    preferIpAddress: true
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: routes
+#---
+#
+#spring:
+#  profiles: docker
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://eurekaserver:8761/eureka/
+
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie

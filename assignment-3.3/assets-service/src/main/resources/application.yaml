@@ -1,0 +1,22 @@
+server:
+  port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#this was needed to enable the data.sql
+spring:
+  datasource:
+    initialization-mode: always
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: org-changes-topic
+          content-type: application/json
+          group: licensingGroup
+      kafka:
+        binder:
+          brokers: localhost

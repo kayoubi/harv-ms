@@ -1,0 +1,7 @@
+/Users/kayoubi/dev/harv-ms/assignment-3.2/common-util/src/main/java/edu/microservices/springboot/assetsservice/hystrix/ThreadLocalConfiguration.java
+/Users/kayoubi/dev/harv-ms/assignment-3.2/common-util/src/main/java/edu/microservices/springboot/assetsservice/context/UserContext.java
+/Users/kayoubi/dev/harv-ms/assignment-3.2/common-util/src/main/java/edu/microservices/springboot/assetsservice/context/UserContextHolder.java
+/Users/kayoubi/dev/harv-ms/assignment-3.2/common-util/src/main/java/edu/microservices/springboot/assetsservice/context/UserContextInterceptor.java
+/Users/kayoubi/dev/harv-ms/assignment-3.2/common-util/src/main/java/edu/microservices/springboot/assetsservice/hystrix/ThreadLocalAwareStrategy.java
+/Users/kayoubi/dev/harv-ms/assignment-3.2/common-util/src/main/java/edu/microservices/springboot/assetsservice/hystrix/DelegatingUserContextCallable.java
+/Users/kayoubi/dev/harv-ms/assignment-3.2/common-util/src/main/java/edu/microservices/springboot/assetsservice/context/UserContextFilter.java

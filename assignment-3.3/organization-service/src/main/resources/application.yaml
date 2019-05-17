@@ -1,0 +1,24 @@
+server:
+  port: 8181
+
+#this was needed to enable the data.sql
+spring:
+  datasource:
+    initialization-mode: always
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: org-changes-topic
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: localhost
+
+
+# this is to point to the auth server
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:8901/user
+
