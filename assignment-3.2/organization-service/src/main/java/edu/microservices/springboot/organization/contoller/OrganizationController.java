@@ -1,11 +1,11 @@
 package edu.microservices.springboot.organization.contoller;
 
+import edu.microservices.springboot.organization.events.source.SimpleSourceBean;
 import edu.microservices.springboot.organization.model.Organization;
 import edu.microservices.springboot.organization.repository.OrganizationRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 /**
  * @author khaled
@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrganizationController {
     private final OrganizationRepository organizationRepository;
+    private final SimpleSourceBean sourceBean;
 
-    public OrganizationController(OrganizationRepository organizationRepository) {
+    public OrganizationController(OrganizationRepository organizationRepository, SimpleSourceBean sourceBean) {
         this.organizationRepository = organizationRepository;
+        this.sourceBean = sourceBean;
     }
 
     @GetMapping("/organizations/{id}")
@@ -31,6 +33,13 @@ public class OrganizationController {
     @DeleteMapping("/organizations/{id}")
     public void delete(@PathVariable String id) {
         organizationRepository.delete(organizationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id)));
+    }
+
+    @PostMapping("/organizations")
+    public Organization create(@RequestBody Organization organization) {
+        Organization saved = organizationRepository.save(organization);
+        sourceBean.publishOrgChange("SAVE", saved.getId());
+        return saved;
     }
 
 }

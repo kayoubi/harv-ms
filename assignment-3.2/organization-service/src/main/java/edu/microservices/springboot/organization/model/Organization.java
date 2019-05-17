@@ -1,5 +1,7 @@
 package edu.microservices.springboot.organization.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 /**
@@ -10,7 +12,8 @@ import javax.persistence.*;
 public class Organization {
     @Id
     @Column(name = "organization_id")
-    @GeneratedValue
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     String id;
     @Column(nullable = false)
     String name;
