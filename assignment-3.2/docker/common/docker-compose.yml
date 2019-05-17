@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   configserver:
-    image: kayoubi/conf-server:2.1
+    image: kayoubi/conf-server:3.2
     ports:
       - "8888:8888"
     healthcheck:
@@ -12,7 +12,7 @@ services:
     environment:
       ENCRYPT_KEY: "IMSYMMETRIC"
   assetsservice:
-    image: kayoubi/assets-service:2.1
+    image: kayoubi/assets-service:3.2
     ports:
       - "8080:8080"
     depends_on:
@@ -23,7 +23,7 @@ services:
       eurekaserver:
         condition: service_started
   organizationservice1:
-    image: kayoubi/organization-service:2.1
+    image: kayoubi/organization-service:3.2
     ports:
       - "8181:8181"
     depends_on:
@@ -34,7 +34,7 @@ services:
       eurekaserver:
         condition: service_started
   organizationservice2:
-    image: kayoubi/organization-service:2.1
+    image: kayoubi/organization-service:3.2
     ports:
       - "8182:8181"
     depends_on:
@@ -45,9 +45,13 @@ services:
       eurekaserver:
         condition: service_started
   eurekaserver:
-    image: kayoubi/eureka-server:2.1
+    image: kayoubi/eureka-server:3.2
     ports:
       - "8761:8761"
+  authserver:
+    image: kayoubi/security-server:3.2
+    ports:
+      - "8901:8901"
   database:
     image: postgres:9.5
     ports:
