@@ -32,8 +32,16 @@ public class OrganizationController {
 
     @DeleteMapping("/organizations/{id}")
     public void delete(@PathVariable String id) {
+        sourceBean.publishOrgChange("DELETE", id);
         organizationRepository.delete(organizationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id)));
     }
+
+    @PutMapping("/organizations/{id}")
+    public void update(@PathVariable String id, @RequestBody Organization organization) {
+        sourceBean.publishOrgChange("UPDATE", id);
+        organizationRepository.findById(id).ifPresent(o -> organizationRepository.save(organization));
+    }
+
 
     @PostMapping("/organizations")
     public Organization create(@RequestBody Organization organization) {

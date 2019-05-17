@@ -67,7 +67,11 @@ public class AssetsServiceApplication {
 		return new AuthorizationCodeResourceDetails();
 	}
 
-	@StreamListener(Sink.INPUT)
+	@StreamListener(Sink.INPUT) // Sink.INPUT is "input" which is what we have in application.yaml "bindings:input:...
+	// alternatively we can have @EnableBinding(CustomChannels.class) where CustomChannels is an interface with a method
+	// 		@Input("inboundOrgChanges")
+	//    	SubscribableChannel orgs();
+	// and application.yaml would have "bindings:inboundOrgChanges:....
 	public void loggerSink(OrganizationChangeModel orgChange) {
 		logger.debug("Received an event for organization {}", orgChange);
 	}
