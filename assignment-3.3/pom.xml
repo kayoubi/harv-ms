@@ -23,6 +23,7 @@
     <module>eurekasrv</module>
     <module>gatewaysrv</module>
     <module>securitysrv</module>
+    <module>zipkinsrv</module>
     <module>common-util</module>
   </modules>
 
