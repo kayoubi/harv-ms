@@ -49,19 +49,19 @@ services:
 #        condition: service_started
     environment:
       - "SPRING_PROFILES_ACTIVE=dev"
-  organizationservice2:
-    image: kayoubi/organization-service:3.3
-    ports:
-      - "8182:8181"
-    depends_on:
-      configserver:
-        condition: service_healthy
-      database-dev:
-        condition: service_started
-      eurekaserver:
-        condition: service_started
-    environment:
-      - "SPRING_PROFILES_ACTIVE=dev"
+#  organizationservice2:
+#    image: kayoubi/organization-service:3.3
+#    ports:
+#      - "8182:8181"
+#    depends_on:
+#      configserver:
+#        condition: service_healthy
+#      database-dev:
+#        condition: service_started
+#      eurekaserver:
+#        condition: service_started
+#    environment:
+#      - "SPRING_PROFILES_ACTIVE=dev"
   database-dev:
     extends:
       file: ../common/docker-compose.yml

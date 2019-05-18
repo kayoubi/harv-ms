@@ -3,6 +3,8 @@ package edu.microservices.springboot.organization.contoller;
 import edu.microservices.springboot.organization.events.source.SimpleSourceBean;
 import edu.microservices.springboot.organization.model.Organization;
 import edu.microservices.springboot.organization.repository.OrganizationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -12,6 +14,8 @@ import java.util.UUID;
  */
 @RestController
 public class OrganizationController {
+    private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
+
     private final OrganizationRepository organizationRepository;
     private final SimpleSourceBean sourceBean;
 
@@ -22,6 +26,7 @@ public class OrganizationController {
 
     @GetMapping("/organizations/{id}")
     public Organization getById(@PathVariable String id) {
+        logger.debug("retrieving org id {}", id);
         return organizationRepository.findById(id).orElse(null);
     }
 
