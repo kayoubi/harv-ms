@@ -5,7 +5,10 @@ import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import brave.Tracer;
 
 /**
  * @author khaled
@@ -15,6 +18,9 @@ public class ResponseFilter extends ZuulFilter {
     private static final int FILTER_ORDER = 1;
     private static final boolean SHOULD_FILTER = true;
     private static final Logger logger = LoggerFactory.getLogger(ResponseFilter.class);
+
+    @Autowired
+    private Tracer tracer;
 
     @Override
     public String filterType() {
@@ -35,9 +41,9 @@ public class ResponseFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         RequestContext ctx = RequestContext.getCurrentContext();
 
-        logger.debug("Adding the correlation id to the outbound headers. {}", FilterUtils.getCorrelationId());
+        logger.debug("Adding the correlation id to the outbound headers. {}", tracer.currentSpan().context().traceIdString());
 
-        ctx.getResponse().addHeader( FilterUtils.CORRELATION_ID, FilterUtils.getCorrelationId());
+        ctx.getResponse().addHeader( FilterUtils.CORRELATION_ID, tracer.currentSpan().context().traceIdString());
 
         logger.debug("Completing outgoing request for {}.", ctx.getRequest().getRequestURI());
 

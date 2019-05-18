@@ -88,3 +88,13 @@ services:
     extends:
       file: ../common/docker-compose.yml
       service: redis
+  logspout:
+    image: gliderlabs/logspout
+    command: logs3.papertrailapp.com:31504
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+#  running manually:
+#  docker run --restart=always -d \
+#     -v=/var/run/docker.sock:/var/run/docker.sock gliderlabs/logspout  \
+#     syslog+tls://logs3.papertrailapp.com:31504
