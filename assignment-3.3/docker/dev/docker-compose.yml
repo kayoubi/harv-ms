@@ -90,7 +90,7 @@ services:
       service: redis
   logspout:
     image: gliderlabs/logspout
-    command: logs3.papertrailapp.com:31504
+    command: 'syslog://logs3.papertrailapp.com:31504'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -98,3 +98,9 @@ services:
 #  docker run --restart=always -d \
 #     -v=/var/run/docker.sock:/var/run/docker.sock gliderlabs/logspout  \
 #     syslog+tls://logs3.papertrailapp.com:31504
+
+  zipkinserver:
+    image: openzipkin/zipkin
+#    image: kayoubi/zipkin-server:3.3
+    ports:
+      - 9411:9411
