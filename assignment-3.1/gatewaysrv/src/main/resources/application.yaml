@@ -24,3 +24,6 @@ management:
 #  client:
 #    serviceUrl:
 #      defaultZone: http://eurekaserver:8761/eureka/
+
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie

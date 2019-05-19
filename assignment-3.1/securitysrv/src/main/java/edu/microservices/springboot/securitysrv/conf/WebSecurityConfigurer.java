@@ -30,9 +30,9 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-            .withUser("john.carnell").password("password1").roles("USER")
+            .withUser("khaled.ayoubi").password("password1").roles("USER")
             .and()
-            .withUser("william.woodward").password("password2").roles("USER", "ADMIN");
+            .withUser("john.daw").password("password2").roles("USER", "ADMIN");
     }
 
     @Bean

@@ -9,7 +9,7 @@ services:
       file: ../common/docker-compose.yml
       service: eurekaserver
   assetsservice:
-    image: kayoubi/assets-service:2.1
+    image: kayoubi/assets-service:3.1
     ports:
       - "8080:8080"
     environment:
@@ -20,7 +20,7 @@ services:
       database-dev:
         condition: service_started
   gatewayserver:
-    image: kayoubi/gateway-server:2.1
+    image: kayoubi/gateway-server:3.1
     ports:
       - "8787:8787"
     environment:
@@ -30,8 +30,12 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_started
+  authserver:
+    image: kayoubi/security-server:3.1
+    ports:
+      - "8901:8901"
   organizationservice1:
-    image: kayoubi/organization-service:2.1
+    image: kayoubi/organization-service:3.1
     ports:
       - "8181:8181"
     depends_on:
@@ -44,7 +48,7 @@ services:
     environment:
       - "SPRING_PROFILES_ACTIVE=dev"
   organizationservice2:
-    image: kayoubi/organization-service:2.1
+    image: kayoubi/organization-service:3.1
     ports:
       - "8182:8181"
     depends_on:

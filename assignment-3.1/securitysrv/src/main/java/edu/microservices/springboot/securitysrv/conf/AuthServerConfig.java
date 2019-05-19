@@ -31,8 +31,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-            .withClient("ayoubi")
-            .secret("secret-password")
+            .withClient("eagleeye")
+            .secret("thisissecret")
             .authorizedGrantTypes("refresh_token", "password", "client_credentials")
             .scopes("web-client", "mobile-client");
     }
